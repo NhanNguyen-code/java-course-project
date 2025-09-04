@@ -51,16 +51,12 @@ public class CourseList {
 	
 	public String findDepartmentWithMostCourses() {
 	    if (count == 0) return null;
-
-	    // Tạo mảng chứa tên khoa và số lượng
 	    String[] depNames = new String[count];
 	    int[] depCounts = new int[count];
 	    int depSize = 0;
-
 	    for (int i = 0; i < count; i++) {
 	        String dep = courses[i].getDepartment();
 	        boolean found = false;
-
 	        for (int j = 0; j < depSize; j++) {
 	            if (depNames[j].equals(dep)) {
 	                depCounts[j]++;
@@ -68,22 +64,18 @@ public class CourseList {
 	                break;
 	            }
 	        }
-
 	        if (!found) {
 	            depNames[depSize] = dep;
 	            depCounts[depSize] = 1;
 	            depSize++;
 	        }
 	    }
-
-	    // Tìm department có số lượng lớn nhất
 	    int maxIndex = 0;
 	    for (int i = 1; i < depSize; i++) {
 	        if (depCounts[i] > depCounts[maxIndex]) {
 	            maxIndex = i;
 	        }
 	    }
-
 	    return depNames[maxIndex];
 	}
 
@@ -160,3 +152,4 @@ public class CourseList {
 	}
 	
 }
+
