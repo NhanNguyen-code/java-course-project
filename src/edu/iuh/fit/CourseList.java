@@ -7,10 +7,7 @@
 package edu.iuh.fit;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
 
 public class CourseList {
 	//Property
@@ -53,13 +50,43 @@ public class CourseList {
 	}
 	
 	public String findDepartmentWithMostCourses() {
-		if(count == 0) return null;
-		HashMap<String, Integer> map = new HashMap<>();
-		for(int i = 0; i < count; i++) {
-			map.put(courses[i].getDepartment(), map.getOrDefault(courses[i].getDepartment(), 0) + 1);
-		}
-		return Collections.max(map.entrySet(), Map.Entry.comparingByValue()).getKey();
+	    if (count == 0) return null;
+
+	    // Tạo mảng chứa tên khoa và số lượng
+	    String[] depNames = new String[count];
+	    int[] depCounts = new int[count];
+	    int depSize = 0;
+
+	    for (int i = 0; i < count; i++) {
+	        String dep = courses[i].getDepartment();
+	        boolean found = false;
+
+	        for (int j = 0; j < depSize; j++) {
+	            if (depNames[j].equals(dep)) {
+	                depCounts[j]++;
+	                found = true;
+	                break;
+	            }
+	        }
+
+	        if (!found) {
+	            depNames[depSize] = dep;
+	            depCounts[depSize] = 1;
+	            depSize++;
+	        }
+	    }
+
+	    // Tìm department có số lượng lớn nhất
+	    int maxIndex = 0;
+	    for (int i = 1; i < depSize; i++) {
+	        if (depCounts[i] > depCounts[maxIndex]) {
+	            maxIndex = i;
+	        }
+	    }
+
+	    return depNames[maxIndex];
 	}
+
 	
 	public Course[] findMaxCreditCourses() {
 		if(count == 0) return null;

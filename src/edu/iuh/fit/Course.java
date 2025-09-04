@@ -72,19 +72,6 @@ public class Course {
 	}
 	
 	@Override
-	public boolean equals(Object o) {
-	    if (this == o) return true;
-	    if (!(o instanceof Course)) return false;
-	    Course c = (Course) o;
-	    return id.equalsIgnoreCase(c.id);
-	}
-
-	@Override
-	public int hashCode() {
-	    return id.toLowerCase().hashCode();
-	}
-	
-	@Override
 	public String toString() {
 		return String.format("%-10s %-20s %-5d %-15s", id, title, credit, department );
 	}
